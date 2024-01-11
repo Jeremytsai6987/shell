@@ -1,0 +1,31 @@
+SAQ1:
+				                                                          |-----> print("<2>") -----> print("1") print("2")	
+				                                                          |				
+				                                                          |				
+				                                                          |				
+				|-----> print("<2>") -----> print("1") print("2") -----> fork -----> print("<1>") -----> print("1") print("2")
+				|				
+				|
+				|				
+				|
+Main ------------------------> fork -----> print("<1>") -----> print("1") print("2") -----> fork -----> print("<1>") -----> print("1") print("2")
+				                                                          |
+				                                                          |				
+				                                                          |				
+				                                                          |-----> print("<2>") -----> print("1") print("2")		
+
+SAQ2:
+
+("A&&C", "A&&D", "B&&C", "B&&D", "C&&D") are concurrent.
+
+SAQ3:
+No, it can not. The reasons are listed below:
+1. User Permissions: The init process runs as the root user, so it typically has permission to send signals to any process. However, if a process is running as a different user and has specifically set up permissions to deny signals from other users (even root), then the init process may not be able to terminate it directly.
+
+2. Kernel Processes: Processes that run in kernel mode may not be directly killable by the init process. These are typically essential to the operation of the OS, and termination of these processes could lead to system instability.
+
+3. Zombie Processes: Zombie processes are defunct processes that have completed execution but still have an entry in the process table. These processes cannot be killed since they are already 'dead'; they remain in the process table until their parent process reads their exit status.
+
+4. Immutable Processes: In some Unix-like systems, processes can be marked as immutable or unkillable, which would prevent any process from terminating them until this flag is removed.
+
+5. Security Context: On systems with Security-Enhanced Linux (SELinux) or similar security modules, the security context may restrict even the root user's actions, which can restrict the init process from terminating some processes.
